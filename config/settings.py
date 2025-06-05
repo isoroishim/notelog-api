@@ -7,6 +7,7 @@ from datetime import timedelta
 # BASE_DIR / 環境変数の読み込み
 # ---------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -21,7 +22,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 # アプリケーション定義
 # ---------------------
 INSTALLED_APPS = [
-    # Djangoデフォルト
+    # Django 標準アプリ
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,13 +37,14 @@ INSTALLED_APPS = [
 
     # 自作アプリ
     'users',
+    'notes',
 ]
 
 # ---------------------
 # ミドルウェア
 # ---------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # CORSは最上位に
+    'corsheaders.middleware.CorsMiddleware',  # 必ず上部に配置
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,14 +55,13 @@ MIDDLEWARE = [
 ]
 
 # ---------------------
-# URL設定・WSGI
+# URL / WSGI
 # ---------------------
 ROOT_URLCONF = 'config.urls'
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ---------------------
-# テンプレート設定
+# テンプレート
 # ---------------------
 TEMPLATES = [
     {
@@ -79,7 +80,7 @@ TEMPLATES = [
 ]
 
 # ---------------------
-# データベース設定（PostgreSQL）
+# データベース（PostgreSQL）
 # ---------------------
 DATABASES = {
     'default': {
@@ -103,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ---------------------
-# 言語・タイムゾーン
+# タイムゾーンと言語
 # ---------------------
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
@@ -136,12 +137,12 @@ SIMPLE_JWT = {
 }
 
 # ---------------------
-# CORS設定
+# CORS 設定
 # ---------------------
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[])
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # 本番ではFalse推奨
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # 本番は False 推奨
 
 # ---------------------
-# 自動フィールド
+# 自動フィールド設定
 # ---------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

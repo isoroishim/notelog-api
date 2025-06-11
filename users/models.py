@@ -18,14 +18,14 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)  # 表示名として使用
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name']  # nameを登録必須に
 
     def __str__(self):
         return self.email

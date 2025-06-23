@@ -1,6 +1,21 @@
-.env
-__pycache__/
+# 仮想環境・キャッシュ
 .venv/
-*.sqlite3
-*.pyc
+venv/
+__pycache__/
+*.py[cod]
 
+# DB・環境変数
+*.sqlite3
+.env
+
+# OS・IDE設定
+.DS_Store
+.vscode/
+.idea/
+
+# pip誤追加防止
+**/site-packages/
+
+# ログ
+logs/
+*.log

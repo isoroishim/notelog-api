@@ -1,10 +1,20 @@
 # notelog-api/notes/urls.py
+from django.urls import path
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import NoteViewSet
+@api_view(['GET'])
+def note_list_placeholder(request):
+    """ノート一覧API（プレースホルダー）"""
+    return Response({'message': 'ノート機能は開発中です', 'notes': []})
 
-router = DefaultRouter()
-router.register(r'notes', NoteViewSet)  # → /api/notes/ に対応
+@api_view(['POST'])
+def note_create_placeholder(request):
+    """ノート作成API（プレースホルダー）"""
+    return Response({'message': 'ノート作成機能は開発中です'})
 
-urlpatterns = router.urls  # ✅ routerのURLだけを返す
+urlpatterns = [
+    # ノート関連API（プレースホルダー）
+    path('', note_list_placeholder, name='note_list'),
+    path('create/', note_create_placeholder, name='note_create'),
+]
